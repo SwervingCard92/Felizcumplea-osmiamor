@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>El mejor día 12</title>
+  <style>
+    :root{
+      --bg1:#0b1220; --bg2:#0d1529; --text:#e6ebff;
+      --heading-color:#412d09;
+      --letter-color:#412d09;
+      --cursor-color:#e6ebff;
+      --restart-bg:#0f172a;
+      --restart-text:#e6ebff;
+      --restart-border:rgba(255,255,255,.15);
+      --restart-bg-hover:#16223b;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; color:var(--text); background:linear-gradient(180deg,var(--bg1),var(--bg2));}
+
+    #bgImg{position:fixed; inset:0; width:100%; height:100%; object-fit:cover; z-index:-3; opacity:1; filter:none;}
+
+    .wrap{width:100%; max-width:1200px; margin:0 auto; padding:24px;}
+
+    header{position:relative; background:transparent; z-index:10; padding:10px 0 14px; margin:0 0 10px 0; text-align:center; width:100%;}
+    h1{margin:0; font-weight:600; font-size:clamp(22px,3vw,30px); color:var(--heading-color); text-shadow:none !important; filter:none !important;}
+    .sub{opacity:.8; font-size:13px}
+
+    .shell{display:grid; gap:18px; align-items:stretch;}
+    @media(min-width:960px){ .shell{grid-template-columns:1fr 1fr;} }
+    @media(max-width:959.98px){ header{width:100%;} }
+    @media(min-width:960px){ header{ width:calc(50% - 9px); margin-left:0; text-align:center; } }
+
+    .letterBox{position:relative; border:none; background:transparent; padding:0; min-height:60vh;}
+    .textBg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;}
+    .letter{position:relative; z-index:1; font:16px/1.9 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace; white-space:pre-wrap; text-align:justify; text-justify:inter-word; hyphens:auto; padding:2rem; color:var(--letter-color); text-shadow:0 1px 2px rgba(0,0,0,.4);}
+    .cursor{display:inline-block;width:.6ch;margin-left:1px;background:var(--cursor-color, currentColor);animation:blink .6s steps(1,end) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    .done{color:#7fcfb8;font-size:13px;margin-top:10px}
+
+    .imageBox{
+        display:flex; 
+        flex-direction:column;
+        align-items:center; 
+        justify-content:center;
+        overflow:hidden; 
+        background:transparent; 
+        padding:2rem 0;
+        align-self:stretch;
+        gap: 20px;
+    }
+    .floatWrap{
+        position:relative; 
+        width:100%; 
+        display:flex; 
+        align-items:center; 
+        justify-content:center; 
+        padding:0;
+    }
+    .floatWrap img{width:auto; height:100%; max-height:none; max-width:100%; object-fit:contain; animation:float 10s ease-in-out infinite;}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+
+    .button-container {
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:20;
+      display:flex;
+      gap: 10px;
+    }
+    .restart-btn {
+      border:1px solid var(--restart-border);background:var(--restart-bg);color:var(--restart-text);padding:8px 12px;border-radius:14px;cursor:pointer;font-size:14px;backdrop-filter:blur(6px) saturate(120%);box-shadow:0 6px 20px rgba(0,0,0,.25);transition:.2s background,.2s transform
+    }
+    .restart-btn:hover{background:var(--restart-bg-hover);transform:translateY(-1px)}
+    
+  </style>
+</head>
+<body>
+  <img id="bgImg" src="fondogeneral.png" alt="Fondo general">
+  <main class="wrap">
+    <header>
+      <h1 id="heading">Feliz cumpleaños</h1>
+    </header>
+
+    <section class="shell">
+      <article class="letterBox">
+        <img id="textBg" class="textBg" src="fondo.png" alt="Fondo del texto">
+        <div id="letter" class="letter"></div>
+        <div id="done" class="done" hidden>Te amo. ❤︎ </div>
+      </article>
+
+      <aside class="imageBox">
+        <div class="floatWrap">
+          <img id="giftImage" src="imagen.png" alt="Imagen del recuerdo">
+        </div>
+        
+        <iframe style="border-radius:12px; width:90%; max-width:450px;" 
+                src="https://open.spotify.com/playlist/0uQ3ATwRaboweyXYzYvxRK?si=812a9d1bfbb9402d" 
+                height="152" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+        </iframe>
+      </aside>
+    </section>
+  </main>
+
+  <div class="button-container">
+    <button id="muteBtn" class="restart-btn" title="Silenciar sonido">🔇</button>
+    <button id="restartBtn" class="restart-btn" title="Volver a empezar">↺ Reiniciar</button>
+  </div>
+
+  <script>
+    const HEADING='FELIZ CUMPLEAÑOS MI AMOR ❤︎';
+    const TEXT = `Para mi siempre amada Mayriel, mi amor…
+
+Han transcurrido veintiún ciclos solares desde que el tiempo, en su insondable artificio, decidió otorgar a la existencia uno de sus más altos dones. No hay designio más singular ni más divino que aquel que permite al universo contemplarse a sí mismo a través de tus ojos: espejos donde se refleja la claridad de lo humano y el misterio de lo eterno. En ellos han nacido asombros, ternuras, dolores y memorias; en ellos habita el testimonio de una vida que, aun entre la fugacidad, ha dejado huellas indelebles en cada alma que te ha encontrado.
+
+Nombrar la autenticidad es evocarte. Eres esa sonrisa que convierte la rutina en júbilo, esa bondad que redime los días más opacos. En ti, lo mínimo se vuelve prodigio: un gesto, una palabra, una mirada bastan para recordarle al mundo que todavía hay belleza. Creer que habrá algo mejor es, en el fondo, creer en ti; porque es a través de tu existencia que todo adquiere sentido.
+
+El tiempo, ese antiguo ilusionista, no bastaría para contener lo que significa celebrar tu vida. Ni los días ni los siglos, ni siquiera las metáforas podrían expresar la gratitud de haberte conocido. El lenguaje, pobre instrumento de lo infinito, tendría que reinventarse mil veces para pronunciarte con justicia.
+
+Decirte “Feliz cumpleaños” es apenas una forma humana de agradecer el milagro de tu ser. Es un intento torpe, aunque sincero, de desearte lo que ya mereces por derecho: la alegría absoluta, la ternura sin medida, y un día que sea reflejo del amor que inspiras en todos los que te miran.
+
+Atte: Un hombre que te adora.`;
+    
+    const START_DELAY_MS=1000;
+    const SPEED=1.0;
+    const INITIAL_SOUND_ENABLED=true;
+
+    const elHeading=document.getElementById('heading');
+    const elLetter=document.getElementById('letter');
+    const elDone=document.getElementById('done');
+    const elRestart=document.getElementById('restartBtn');
+    const elMute=document.getElementById('muteBtn');
+
+    let shown=0,playing=false,raf=null,last=0;
+    const tickMs=20;
+    const charsPerTick=1;
+    let startTimer=null;
+    let soundEnabled = INITIAL_SOUND_ENABLED;
+
+    elHeading.textContent=HEADING;
+
+    let audioCtx=null;
+
+    function createNoiseBuffer(ctx){const b=ctx.createBuffer(1,ctx.sampleRate*.2,ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*.8;return b}
+    
+    async function ensureAudio(){
+      if(!soundEnabled)return;
+      if(!audioCtx){const AC=window.AudioContext||window.webkitAudioContext;audioCtx=new AC()}
+      if(audioCtx.state==='suspended')await audioCtx.resume()
+    }
+
+    function typeSound(){
+      if(!soundEnabled||!audioCtx)return;
+      const now=audioCtx.currentTime;
+      const n=audioCtx.createBufferSource();n.buffer=createNoiseBuffer(audioCtx);
+      
+      const bp=audioCtx.createBiquadFilter();
+      bp.type='bandpass';
+      
+      const randomFreq = 200 + (Math.random() * 1000);
+      bp.frequency.setValueAtTime(randomFreq, now);
+      bp.Q.value=2;
+      
+      const g=audioCtx.createGain();
+      
+      const randomGain = 0.03 + (Math.random() * 0.02);
+      
+      g.gain.setValueAtTime(.0001,now);
+      g.gain.exponentialRampToValueAtTime(randomGain, now + 0.01); 
+      
+      const randomDecay = 0.1 + (Math.random() * 0.05);
+      g.gain.exponentialRampToValueAtTime(.0001, now + randomDecay);
+      
+      n.connect(bp).connect(g).connect(audioCtx.destination);
+      n.start(now);
+      n.stop(now + randomDecay + 0.01);
+    }
+
+    function render(){const visible=TEXT.slice(0,shown),fin=shown>=TEXT.length;elLetter.innerHTML='';const span=document.createElement('span');span.textContent=visible;elLetter.appendChild(span);const cursor=document.createElement('span');cursor.className='cursor';cursor.textContent='\u00A0';if(fin)cursor.style.display='none';elLetter.appendChild(cursor);elDone.hidden=!fin}
+
+    function frame(t){if(!playing)return;if(!last)last=t;const interval=tickMs/Math.min(2,Math.max(.5,SPEED));if(t-last>=interval){const next=Math.min(TEXT.length,shown+charsPerTick);if(next>shown)typeSound();shown=next;render();last=t;if(shown>=TEXT.LENGTH){playing=false;return}}raf=requestAnimationFrame(frame)}
+
+    function startTyping(){if(playing)return;playing=true;last=0;requestAnimationFrame(frame)}
+    function scheduleStart(){clearTimeout(startTimer);startTimer=setTimeout(()=>{ensureAudio();startTyping()},Math.max(0,START_DELAY_MS))}
+    function resetAll(){playing=false;if(raf)cancelAnimationFrame(raf);shown=0;last=0;render();scheduleStart()}
+
+    elRestart.addEventListener('click',resetAll);
+    window.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='r')resetAll()});
+
+    function updateMuteButton(){
+      elMute.textContent = soundEnabled ? '🔇' : '🔈';
+      elMute.title = soundEnabled ? 'Silenciar sonido' : 'Activar sonido';
+    }
+
+    elMute.addEventListener('click',()=>{
+      soundEnabled = !soundEnabled;
+      updateMMuteButton();
+    });
+
+    updateMuteButton();
+    
+    render();
+    scheduleStart();
+  </script>
+</body>
+</html>
