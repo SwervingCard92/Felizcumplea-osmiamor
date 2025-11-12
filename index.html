@@ -96,15 +96,15 @@
           <img id="giftImage" src="imagen.png" alt="Imagen del recuerdo">
         </div>
         
-        <iframe style="border-radius:12px" 
-                src="https://open.spotify.com/playlist/0uQ3ATwRaboweyXYzYvxRK?si=812a9d1bfbb9402d" 
-                width="100%" 
+        <iframe style="border-radius:12px; width:90%; max-width:450px;" 
+                src="https://open.spotify.com/embed/playlist/0uQ3ATwRaboweyXYzYvxRK?utm_source=generator" 
                 height="152" 
                 frameBorder="0" 
                 allowfullscreen="" 
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                 loading="lazy">
         </iframe>
+        
       </aside>
     </section>
   </main>
@@ -201,7 +201,7 @@ Atte: Un hombre que te adora.`;
 
     elMute.addEventListener('click',()=>{
       soundEnabled = !soundEnabled;
-      updateMMuteButton();
+      updateMuteButton();
     });
 
     updateMuteButton();
@@ -210,5 +210,4 @@ Atte: Un hombre que te adora.`;
     scheduleStart();
   </script>
 </body>
-
 </html>
